@@ -15,14 +15,15 @@ namespace Pixygon.Highscores {
         public string Version { get; set; }
         public string Game { get; set; }
 
+        public string FromDate { get; set; } = "2023-09-10";
+        public string ToDate { get; set; } = "2023-09-12";
+
         private void Awake() {
             _scoreTypeText.text = _searchType;
         }
         public async void GetHighscores() {
-            var dateTime = DateTime.Now;
-            dateTime.Subtract(new TimeSpan(7, 0, 0, 0));
             PopulateBoard(JsonUtility.FromJson<Highscores>(await PixygonApi.GetHighScores(
-                Game, _searchType, Version, dateTime, DateTime.Now)));
+                Game, _searchType, Version, FromDate, ToDate)));
         }
 
         public static void PostHighscore(string game, string user, int score, int kills, float time, string detail, string version = "1.0.0", int multiplierPercent = 100) {
