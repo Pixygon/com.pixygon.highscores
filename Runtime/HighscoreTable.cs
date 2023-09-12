@@ -12,21 +12,17 @@ namespace Pixygon.Highscores {
 
         private List<ScoreObject> _scores;
         private string _searchType = "score";
-        private string _version;
+        public string Version { get; set; }
+        public string Game { get; set; }
 
         private void Awake() {
             _scoreTypeText.text = _searchType;
         }
-
-        private void SetVersion(string version) {
-            _version = version;
-        }
-
         public async void GetHighscores() {
             var dateTime = DateTime.Now;
             dateTime.Subtract(new TimeSpan(7, 0, 0, 0));
             PopulateBoard(JsonUtility.FromJson<Highscores>(await PixygonApi.GetHighScores(
-                "64e4df726a2585b4af8bce10", _searchType, _version, dateTime, DateTime.Now)));
+                Game, _searchType, Version, dateTime, DateTime.Now)));
         }
 
         public static void PostHighscore(string game, string user, int score, int kills, float time, string detail, string version = "1.0.0", int multiplierPercent = 100) {
