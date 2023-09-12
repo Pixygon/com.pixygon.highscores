@@ -45,7 +45,6 @@ namespace Pixygon.Highscores {
             foreach (var s in _scores) {
                 Destroy(s.gameObject);
             }
-
             _scores = null;
         }
 
