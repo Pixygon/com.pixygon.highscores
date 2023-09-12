@@ -16,7 +16,7 @@ namespace Pixygon.Highscores {
 
         private void Start() {
             time = DateTime.Today;
-            time.Subtract(new TimeSpan(_startOffset, 0, 0, 0));
+            time = time.Subtract(new TimeSpan(_startOffset, 0, 0, 0));
             SetDate();
         }
         public void OnChangeDay(bool up) {
