@@ -20,12 +20,12 @@ namespace Pixygon.Highscores {
             SetDate();
         }
         public void OnChangeDay(bool up) {
-            time.AddDays(up ? 1 : -1);
+            time = time.AddDays(up ? 1 : -1);
             SetDate();
         }
 
         public void OnChangeMonth(bool up) {
-            time.AddMonths(up ? 1 : -1);
+            time = time.AddMonths(up ? 1 : -1);
             SetDate();
         }
 
@@ -35,10 +35,10 @@ namespace Pixygon.Highscores {
         }
 
         private void SetDate() {
-            //if(time >= DateTime.Today)
-            //    time = DateTime.Today;
-            //if (time <= new DateTime(2023, 8, 22)) ;
-            //    time = new DateTime(2023, 8, 23);
+            if(time >= DateTime.Today)
+                time = DateTime.Today;
+            if (time <= new DateTime(2023, 8, 22)) ;
+                time = new DateTime(2023, 8, 23);
             _dayText.text = time.Day.ToString();
             _monthText.text = time.Month.ToString();
             _yearText.text = time.Year.ToString();
