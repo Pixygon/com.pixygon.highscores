@@ -1,0 +1,24 @@
+{
+  "name": "com.pixygon.highscores",
+  "version": "0.5.0",
+  "displayName": "Pixygon - HighScores",
+  "description": "HighScore system for Pixygon-games!",
+  "unity": "2023.1",
+  "unityRelease": "12f1",
+  "documentationUrl": "https://www.pixygon.io/dev/highscores",
+  "changelogUrl": "https://www.pixygon.io/dev/highscores/changelog",
+  "licensesUrl": "https://www.pixygon.io/dev/highscores/license",
+  "dependencies": {
+    "com.pixygon.passport": "0.5.0"
+ },
+"hideInEditor": false,
+ "keywords": [
+    "Pixygon",
+    "Highscores"
+  ],
+  "author": {
+    "name": "Pixygon",
+    "email": "pixygon@pixygon.io",
+    "url": "https://www.pixygon.io"
+  }
+}
