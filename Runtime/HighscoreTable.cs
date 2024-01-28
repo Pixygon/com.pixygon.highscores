@@ -87,7 +87,7 @@ namespace Pixygon.Highscores {
                 _scores.Add(g);
             }
 
-            _highscoreParent.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, _scores.Count * 30f);
+            _highscoreParent.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, _scores.Count * 60f);
         }
     }
 }
