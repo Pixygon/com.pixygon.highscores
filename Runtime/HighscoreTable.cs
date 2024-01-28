@@ -12,6 +12,7 @@ namespace Pixygon.Highscores {
         [SerializeField] private TextMeshProUGUI _versionText;
         [SerializeField] private DateSelecter _fromDateSelector;
         [SerializeField] private DateSelecter _toDateSelector;
+        [SerializeField] private PassportCard _passportCard;
 
         private List<ScoreObject> _scores;
         private string _searchType = "score";
@@ -82,7 +83,7 @@ namespace Pixygon.Highscores {
             _scores = new List<ScoreObject>();
             for (var i = 0; i < scores.highscores.Length; i++) {
                 var g = Instantiate(_highscoreObjectPrefab, _highscoreParent);
-                g.Set(i + 1, scores.highscores[i], _searchType);
+                g.Set(i + 1, scores.highscores[i], _searchType, _passportCard.GetUser);
                 _scores.Add(g);
             }
 
