@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Pixygon.Passport;
 using TMPro;
@@ -13,28 +12,30 @@ namespace Pixygon.Highscores {
         [SerializeField] private DateSelecter _fromDateSelector;
         [SerializeField] private DateSelecter _toDateSelector;
         [SerializeField] private PassportCard _passportCard;
+        [SerializeField] private bool _singleGame;
+        [SerializeField] private string _gameId;
 
         private List<ScoreObject> _scores;
         private string _searchType = "score";
-        public string Game { get; set; }
         public string[] Versions { get; set; }
-        public int CurrentVersion { get; set; }
+        public int FromVersion { get; set; }
+        public int ToVersion { get; set; }
 
         public string FromDate { get; set; } = "2023-09-10";
         public string ToDate { get; set; } = "2023-09-12";
 
-
         private void Awake() {
             _scoreTypeText.text = _searchType;
-            CurrentVersion = Versions.Length - 1;
-            _versionText.text = "v" + Versions[CurrentVersion];
+            if (Versions == null)
+                Versions = new[] { "all" };
+            FromVersion = Versions.Length - 1;
+            _versionText.text = "v" + Versions[FromVersion];
             _fromDateSelector.OnDateChange = s => { FromDate = s; GetHighscores(); };
             _toDateSelector.OnDateChange = s => { ToDate = s; GetHighscores(); };
         }
-        
         public async void GetHighscores() {
             PopulateBoard(JsonUtility.FromJson<Highscores>(await PixygonApi.GetHighScores(
-                Game, _searchType, Versions[CurrentVersion], FromDate, ToDate)));
+                _gameId, _searchType, Versions[FromVersion], FromDate, ToDate)));
         }
 
         public static void PostHighscore(string game, string user, int score, int kills, float time, string detail, string version = "1.0.0", int multiplierPercent = 100) {
@@ -43,19 +44,19 @@ namespace Pixygon.Highscores {
 
         public void OnNextVersion(int i) {
             if (i == -1) {
-                if (CurrentVersion == 0)
-                    CurrentVersion = Versions.Length - 1;
+                if (FromVersion == 0)
+                    FromVersion = Versions.Length - 1;
                 else
-                    CurrentVersion -= 1;
+                    FromVersion -= 1;
             }
             else {
-                if (CurrentVersion == Versions.Length - 1)
-                    CurrentVersion = 0;
+                if (FromVersion == Versions.Length - 1)
+                    FromVersion = 0;
                 else
-                    CurrentVersion += 1;
+                    FromVersion += 1;
             }
 
-            _versionText.text = "v" + Versions[CurrentVersion];
+            _versionText.text = "v" + Versions[FromVersion];
             GetHighscores();
         }
 
